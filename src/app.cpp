@@ -28,7 +28,7 @@ std::string trim(const std::string& text)
     return text.substr(first, last - first + 1);
 }
 
-/// Строка вида «29.02.2024 — четверг».
+/// Дата и день недели одной строкой для вывода на экран.
 std::string describeDate(const Date& date)
 {
     return formatDate(date) + " — " + std::string(weekdayName(dayOfWeek(date)));
