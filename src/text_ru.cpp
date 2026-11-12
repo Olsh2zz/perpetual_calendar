@@ -57,7 +57,7 @@ std::string_view dayWord(long long count) noexcept
     const long long lastTwoDigits = (count < 0 ? -count : count) % 100;
     const long long lastDigit = lastTwoDigits % 10;
 
-    // 11–14 — исключение: «11 дней», хотя число оканчивается на 1.
+    // Числа 11–14 идут отдельно: «11 дней», хотя число оканчивается на 1.
     if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
         return "дней";
     }
@@ -72,7 +72,7 @@ std::string_view dayWord(long long count) noexcept
 
 std::size_t utf8Length(std::string_view text) noexcept
 {
-    // Байты-продолжения в UTF-8 имеют вид 10xxxxxx — их не считаем.
+    // Байты-продолжения в UTF-8 имеют вид 10xxxxxx, их не считаем.
     std::size_t length = 0;
     for (const char symbol : text) {
         if ((static_cast<unsigned char>(symbol) & 0xC0U) != 0x80U) {

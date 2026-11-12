@@ -13,7 +13,7 @@ inline constexpr int kMaxYear = 9999;
 inline constexpr int kMonthsInYear = 12;
 inline constexpr int kDaysInWeek = 7;
 
-/// День недели. Нумерация с понедельника — так удобнее строить сетку календаря.
+/// День недели. Нумерация с понедельника, как в строке таблицы календаря.
 enum class Weekday {
     Monday = 0,
     Tuesday,
@@ -24,7 +24,7 @@ enum class Weekday {
     Sunday,
 };
 
-/// Календарная дата. Сама структура корректность не гарантирует — см. isValidDate.
+/// Календарная дата. Сама структура корректность не гарантирует, см. isValidDate.
 struct Date {
     int day = 1;
     int month = 1;

@@ -156,7 +156,7 @@ void testMonthRenderingEdges()
           "15 16 17 18 19 20 21\n"
           "22 23 24 25 26 27 28\n");
 
-    // Месяц начинается с воскресенья — максимальный отступ в первой неделе.
+    // Месяц начинается с воскресенья: максимальный отступ в первой неделе.
     std::ostringstream wide;
     renderMonth(wide, 9, 2024);
     CHECK(wide.str().find("\n                   1\n 2  3") != std::string::npos);

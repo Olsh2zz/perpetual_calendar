@@ -1,5 +1,5 @@
 // Файл: date.cpp
-// Назначение: реализация календарной арифметики — правило високосного года,
+// Назначение: реализация календарной арифметики: правило високосного года,
 // алгоритм Зеллера и перевод даты в сквозной номер дня.
 
 #include "calendar/date.hpp"
@@ -45,7 +45,7 @@ bool operator!=(const Date& lhs, const Date& rhs) noexcept
 
 bool isLeapYear(int year) noexcept
 {
-    // Кратен 4 — високосный, кратен 100 — нет, кратен 400 — всё же високосный.
+    // Кратен 4: високосный. Кратен 100: нет. Кратен 400: всё же високосный.
     return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
@@ -74,7 +74,7 @@ Weekday dayOfWeek(const Date& date) noexcept
 {
     assert(isValidDate(date));
 
-    // Алгоритм Зеллера: январь и февраль — это 13-й и 14-й месяцы прошлого года.
+    // Алгоритм Зеллера: январь и февраль считаются 13-м и 14-м месяцами прошлого года.
     int month = date.month;
     int year = date.year;
     if (month <= kFebruary) {
@@ -85,7 +85,7 @@ Weekday dayOfWeek(const Date& date) noexcept
     const int century = year / 100;
     const int yearOfCentury = year % 100;
 
-    // Результат формулы: 0 — суббота, 1 — воскресенье, 2 — понедельник, ...
+    // Результат формулы: 0 = суббота, 1 = воскресенье, 2 = понедельник, ...
     const int zeller = (date.day + 13 * (month + 1) / 5 + yearOfCentury
                         + yearOfCentury / 4 + century / 4 + 5 * century) % kDaysInWeek;
 

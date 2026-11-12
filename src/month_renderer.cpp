@@ -1,5 +1,5 @@
 // Файл: month_renderer.cpp
-// Назначение: реализация табличного вывода месяца — заголовок по центру,
+// Назначение: реализация табличного вывода месяца: заголовок по центру,
 // строка дней недели и сетка чисел с отступом в первой неделе.
 
 #include "calendar/month_renderer.hpp"
@@ -28,7 +28,7 @@ bool isWeekend(int column) noexcept
     return column >= static_cast<int>(Weekday::Saturday);
 }
 
-/// Подбирает стиль ячейки. Пустая строка — оформление не требуется.
+/// Подбирает стиль ячейки. Пустая строка означает, что оформление не требуется.
 std::string_view cellStyle(const Date& date, int column, const RenderOptions& options) noexcept
 {
     if (!options.useColor) {

@@ -26,7 +26,7 @@ bool setupConsole()
     SetConsoleCP(CP_UTF8);
 
     // Включаем обработку ANSI-последовательностей; если вывод перенаправлен
-    // в файл, GetConsoleMode вернёт ошибку — и цвета останутся выключенными.
+    // в файл, GetConsoleMode вернёт ошибку, и цвета останутся выключенными.
     const HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD mode = 0;
     if (output == INVALID_HANDLE_VALUE || !GetConsoleMode(output, &mode)) {
@@ -34,8 +34,8 @@ bool setupConsole()
     }
     return SetConsoleMode(output, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0;
 #else
-    // Цвета нужны только в интерактивном терминале; переменная NO_COLOR —
-    // общепринятый способ их отключить (https://no-color.org).
+    // Цвета нужны только в интерактивном терминале. Переменная NO_COLOR
+    // отключает их принудительно (https://no-color.org).
     return isatty(STDOUT_FILENO) != 0 && std::getenv("NO_COLOR") == nullptr;
 #endif
 }
