@@ -10,3 +10,5 @@ out/
 *.exe
 *.obj
 *.o
+/perpetual_calendar
+/calendar_tests

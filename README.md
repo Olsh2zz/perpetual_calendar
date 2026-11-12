@@ -32,19 +32,15 @@
 
 ## Сборка на macOS
 
-1. Установите компилятор. Откройте «Терминал» и выполните команду, затем подтвердите установку в появившемся окне:
+Достаточно компилятора из Xcode Command Line Tools. CMake и Homebrew для этого способа не нужны.
+
+1. Установите компилятор. Откройте «Терминал» и выполните команду, затем подтвердите установку в появившемся окне. Если `git` у вас уже работает, компилятор установлен и этот шаг можно пропустить.
 
    ```bash
    xcode-select --install
    ```
 
-2. Установите CMake через Homebrew:
-
-   ```bash
-   brew install cmake
-   ```
-
-3. Скачайте проект и перейдите в его папку:
+2. Скачайте проект и перейдите в его папку:
 
    ```bash
    git clone https://github.com/olsh2zz/perpetual_calendar.git
@@ -54,29 +50,51 @@
    cd perpetual_calendar
    ```
 
-4. Подготовьте сборку:
+3. Соберите программу:
 
    ```bash
-   cmake -S . -B build
+   clang++ -std=c++17 -Iinclude src/*.cpp -o perpetual_calendar
    ```
 
-5. Соберите программу:
+4. Запустите:
 
    ```bash
-   cmake --build build
+   ./perpetual_calendar
    ```
 
-6. Запустите:
+5. Тесты собираются и запускаются двумя командами. При успехе появится строка «Все тесты пройдены».
 
    ```bash
-   ./build/perpetual_calendar
+   clang++ -std=c++17 -Iinclude tests/calendar_tests.cpp $(ls src/*.cpp | grep -v main.cpp) -o calendar_tests
    ```
-
-7. Тесты запускаются так:
 
    ```bash
-   ctest --test-dir build --output-on-failure
+   ./calendar_tests
    ```
+
+### Вариант с CMake
+
+Команда `brew` есть только там, где установлен Homebrew. Если терминал отвечает `command not found: brew`, сначала поставьте его по инструкции на [brew.sh](https://brew.sh) и выполните команды, которые установщик напечатает в конце (они добавляют `brew` в `PATH`).
+
+```bash
+brew install cmake
+```
+
+```bash
+cmake -S . -B build
+```
+
+```bash
+cmake --build build
+```
+
+```bash
+./build/perpetual_calendar
+```
+
+```bash
+ctest --test-dir build --output-on-failure
+```
 
 ## Сборка в Visual Studio
 
